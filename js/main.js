@@ -245,10 +245,19 @@ window.addEventListener("DOMContentLoaded", () => {
       );
     }
   };
-  const closeModalHandler = () => {
-    animateChangeModal(modal, "reverse").addEventListener("finish", () => {
-      modalWrapper.classList.remove("active");
-    });
+  const closeModalHandler = (e) => {
+    const path = e.path || (e.composedPath && e.composedPath());
+    const { target } = e;
+
+    if (
+      !target.classList.contains("sale__card-btn") &&
+      !target.classList.contains("sale__card-btn-2") &&
+      !path.some((el) => el.classList && el.classList.contains("form"))
+    ) {
+      animateChangeModal(modal, "reverse").addEventListener("finish", () => {
+        modalWrapper.classList.remove("active");
+      });
+    }
   };
   const closeModalListener = (e) => {
     const { target } = e;
@@ -262,7 +271,6 @@ window.addEventListener("DOMContentLoaded", () => {
       !target.classList.contains("sale__card-btn-2")
     ) {
       closeModal();
-      closeModalHandler();
     }
   };
 
@@ -278,6 +286,7 @@ window.addEventListener("DOMContentLoaded", () => {
   };
 
   window.addEventListener("click", closeModalListener);
+  window.addEventListener("click", closeModalHandler);
   changeRateBtn.addEventListener("click", openChangeModal);
   ratesBlock.addEventListener("click", changeCourse);
   const openModalHandler = () => {
@@ -287,4 +296,144 @@ window.addEventListener("DOMContentLoaded", () => {
 
   openModal1.addEventListener("click", openModalHandler);
   openModal2.addEventListener("click", openModalHandler);
+});
+
+const burger = document.querySelector(".burger");
+const menu = document.querySelector(".header__menu-mobile");
+const infoBtns = document.querySelectorAll(".team__info");
+
+document.addEventListener("DOMContentLoaded", () => {
+  const animate = (target, direction, duration = 300) =>
+    target.animate(
+      [
+        { transfrom: "translateX(-50%) translateY(100%)", opacity: 0 },
+        { transfrom: "translateX(-50%) translateY(0%)", opacity: 1 },
+      ],
+      { duration, direction, fill: "forwards" }
+    );
+
+  burger.addEventListener("click", () => {
+    menu.classList.toggle("active");
+    burger.classList.toggle("active");
+  });
+  const scrollToAnchor = (e) => {
+    const { target } = e;
+    const { href } = target;
+    if (href) {
+      const isAnchor = href.indexOf("#");
+      if (isAnchor !== -1) {
+        console.log(href);
+        e.preventDefault();
+        const id = href.substring(isAnchor + 1);
+        const elem = document.getElementById(id);
+        window.scrollTo({
+          behavior: "smooth",
+          top: elem.getBoundingClientRect().top + 300 + document.body.scrollTop,
+        });
+      }
+    }
+  };
+  window.addEventListener("click", scrollToAnchor);
+});
+
+class Slider {
+  constructor(params, selector) {
+    this.keyframes = params.effects;
+    this.slider = document.querySelector(selector);
+    this.slides = this.slider.querySelectorAll(".team__slide");
+
+    this.prevEl = document.querySelectorAll(".team__prev");
+
+    this.nextEl = document.querySelectorAll(".team__next");
+    this._currentSlide = 0;
+  }
+
+  next() {
+    const prevSlide = this.slides[this._currentSlide];
+    if (this._currentSlide >= this.slides.length - 1) this._currentSlide = -1;
+    this._currentSlide++;
+    const currentSlide = this.slides[this._currentSlide];
+
+    currentSlide.classList.add("active");
+    this.toggleAnim(currentSlide, prevSlide).addEventListener("finish", () =>
+      prevSlide.classList.remove("active")
+    );
+  }
+  prev() {
+    const prevSlide = this.slides[this._currentSlide];
+    if (this._currentSlide <= 0) this._currentSlide = this.slides.length;
+    this._currentSlide--;
+    const currentSlide = this.slides[this._currentSlide];
+
+    currentSlide.classList.add("active");
+    this.togglePrevAnim(prevSlide, currentSlide).addEventListener(
+      "finish",
+      () => prevSlide.classList.remove("active")
+    );
+  }
+  toggleAnim(show, hide, direction) {
+    const showKeyframes = [{ left: "100%" }, { left: "0%" }];
+    const hideKeyframes = matchMedia("(max-width: 650px)").matches
+      ? [{ left: "0%" }, { left: "-100%" }]
+      : [{ left: "0%" }, { left: "10%", offset: 0.1 }, { left: "-100%" }];
+    const options = {
+      duration: 500,
+      direction,
+      fill: "forwards",
+    };
+    show.animate(this.keyframes || showKeyframes, {
+      ...options,
+    });
+    return hide.animate(hideKeyframes, { ...options });
+  }
+  togglePrevAnim(show, hide, direction) {
+    const showKeyframes = matchMedia("(max-width: 650px)").matches
+      ? [{ left: "0%" }, { left: "100%" }]
+      : [{ left: "0%" }, { left: "-10%", offset: 0.1 }, { left: "100%" }];
+    const hideKeyframes = [{ left: "-100%" }, { left: "0%" }];
+    const options = {
+      duration: 500,
+      direction,
+      fill: "forwards",
+    };
+    show.animate(this.keyframes || showKeyframes, {
+      ...options,
+    });
+    return hide.animate(hideKeyframes, { ...options });
+  }
+  init() {
+    this.slides[0].classList.add("active");
+
+    this.nextEl?.forEach((el) =>
+      el.addEventListener("click", this.next.bind(this))
+    );
+    this.prevEl?.forEach((el) =>
+      el.addEventListener("click", this.prev.bind(this))
+    );
+  }
+}
+
+const slider = new Slider({}, ".team__slider");
+slider.init();
+
+infoBtns.forEach((el) => {
+  const modal = el.querySelector(".team__modal");
+  const closeInfoModalBtn = el.querySelector(".cross");
+
+  el.addEventListener("click", (e) => {
+    if (
+      !e.target.classList.contains("cross") &&
+      !e.target.classList.contains("team__modal")
+    ) {
+      modal.classList.toggle("active");
+      modal.animate([{ opacity: 0 }, { opacity: 1 }], {
+        duration: 300,
+        fill: "forwards",
+      });
+    }
+  });
+  closeInfoModalBtn.addEventListener("click", (e) => {
+    console.log(e);
+    modal.classList.remove("active");
+  });
 });

@@ -41,7 +41,7 @@ body
     transition: all .3s
     border-radius: 10px
     &:hover
-        background-color: linear-gradient(94.59deg, #6C22FF 0%, #5B7FFF 99.99%, #D1DBFF 100%)
+        background: linear-gradient(94.59deg, #6C22FF 0%, #5B7FFF 99.99%, #D1DBFF 100%)
 
 %title
     font-weight: 700
@@ -60,6 +60,47 @@ body
     max-width: 1395px
     margin: 0 auto
 
+.dropdown
+    position: relative
+
+    &__content
+        position: absolute
+        top: 80px
+        background: white
+        opacity: 0
+        transition: all .3s ease-in-out
+        background: #FBFFFF
+        border-radius: 0px 0px 10px 10px
+        padding: 30px
+        max-width: 380px
+        width: 380px
+        left: -40%
+        transition-delay: .2s
+
+        z-index: 500
+    li
+        margin-top: 20px
+        max-width: 380px
+        a
+            text-decoration: none
+            font-size: 16px !important
+            line-height: 20px !important
+            letter-spacing: 0.05em !important
+            color: #0A1C26
+            transition: all .3s
+            &:hover
+                background: linear-gradient(94.59deg, #AF87FF 0%, #5B7FFF 99.99%, #D1DBFF 100%)
+                -webkit-background-clip: text
+                -webkit-text-fill-color: transparent
+                background-clip: text
+                text-fill-color: transparent
+
+                &:first-child
+                    margin-top: 0
+
+.dropdown:hover .dropdown__content
+    opacity: 1
+
 .header
     padding: 11px 0px
     background: rgba(255, 255, 255, 0.4)
@@ -75,8 +116,10 @@ body
     &__menu
         list-style: none
         display: flex
+
         margin-left: 70px
         &-item
+
             margin: 0px 50px
 
         &-link
@@ -86,9 +129,15 @@ body
             line-height: 29px
             letter-spacing: 0.05em
             text-decoration: none
+            position: relative
             &:hover
-                border: 1px solid
-                border-image-source: linear-gradient(94.59deg, #AF87FF 0%, #5B7FFF 99.99%, #D1DBFF 100%)
+                &::before
+                    content: ""
+                    width: 100%
+                    height: 1px
+                    bottom: -5px
+                    position: absolute
+                    background: linear-gradient(94.59deg, #AF87FF 0%, #5B7FFF 99.99%, #D1DBFF 100%)
 
     &__nav
         display: flex
@@ -117,6 +166,73 @@ body
     &__main
         display: flex
         align-items: center
+    .burger
+        display: none
+        cursor: pointer
+        position: relative
+        width: 30px
+        height: 30px
+        div
+            width: 30px
+            height: 2px
+            background: black
+            position: absolute
+            left: 0
+            transition: all .3s
+            &:first-child
+                margin-top: 0
+            &:nth-child(2n)
+                top: 10px
+            &:nth-child(3n)
+                top: 20px
+        &.active
+
+            div
+
+                &:nth-child(1n)
+                    transform: rotate(45deg)
+                    top: 7px
+                    left: 0px
+                &:nth-child(2n)
+                    opacity: 0
+                    transform: none
+                &:nth-child(3n)
+                    top: 7px
+                    left: 0px
+                    transform: rotate(-45deg)
+    &-right-wrap
+        display: flex
+        align-items: center
+        gap: 60px
+
+.header__menu-mobile
+    transform: translateX(-100%)
+    transition: all .6s ease-in-out
+    position: fixed
+    height: 100%
+    left: 0
+    width: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+    background: linear-gradient(94.59deg, #AF87FF 0%, #5B7FFF 99.99%, #D1DBFF 100%)
+    z-index: 950
+    display: none
+    ul
+        max-width: 500px
+        margin: 0 auto
+    li
+        font-weight: 700
+        font-size: 25px
+        line-height: 31px
+        text-align: center
+        letter-spacing: 0.05em
+        margin-top: 30px
+        a
+            text-decoration: none
+            color: #FBFFFF
+    &.active
+        transform: translateX(0%)
 
 .main
     background-image: url('../images/backgrounds/1.png')
@@ -823,6 +939,10 @@ body
     filter: drop-shadow(0px 4px 46px rgba(0, 0, 0, 0.15))
     background: url('../images/backgrounds/team.png')
     background-size: cover
+
+    .cross
+        display: none
+
     &__photo
         &-swiper
             width: 380px
@@ -832,21 +952,45 @@ body
         display: flex
         align-items: end
         justify-content: space-between
-    &__info
-        &-swiper
+    &__slider
+        display: flex
+        align-items: center
+        justify-content: space-between
+        position: relative
+        overflow: hidden
+        min-height: 450px
+        display: flex
+        align-items: center
+        width: 100%
+
+    &__slide
+        display: flex
+        align-items: center
+        justify-content: space-between
+        max-width: 1400px
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        display: none
+        opacity: 0
+        &-image
+            border-radius: 10px
+        &-text
             max-width: 845px
-            width: 100%
-            overflow: hidden
+            margin-left: 20px
         &-title
             font-weight: 700
-            font-size: 33px
-
+            font-size: 35px
+            line-height: 43px
+            display: flex
+            align-items: flex-end
             letter-spacing: 0.05em
             color: #0A1C26
         &-name
             font-weight: 700
             font-size: 30px
-
+            line-height: 37px
             letter-spacing: 0.05em
             color: #FBFFFF
             text-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25)
@@ -854,27 +998,76 @@ body
         &-position
             font-weight: 700
             font-size: 20px
-
+            line-height: 25px
             letter-spacing: 0.05em
             color: #5E5E5E
             margin-top: 15px
-    &__about
+        &-footer
+            display: flex
+            align-items: center
+            justify-content: space-between
+            margin-top: 40px
+        &.active
+            display: flex
+            opacity: 1
+        &:nth-child(2n)
+            .team__slide-title
+                font-size: 30px
+                line-height: 100%
+        &:nth-child(3n)
+            .team__slide-title
+                font-size: 30px
+                line-height: 100%
+    &__navigation
         display: flex
         align-items: center
+        justify-content: space-between
+        gap: 20px
+
+        .team__next, .team__prev
+            border-radius: 50%
+            cursor: pointer
+
+    &__info
+        display: flex
+        align-items: center
+        justify-content: space-between
+        position: relative
+        cursor: pointer
         &-icon
             border-radius: 50%
-        &-text
+            margin-left: 20px
+        &-title
             font-weight: 400
             font-size: 18px
             line-height: 22px
             letter-spacing: 0.05em
             color: #5E5E5E
-            margin-right: 30px
-    &__footer
-        display: flex
-        align-content: center
-        justify-content: space-between
-        margin-top: 40px
+    &__modal
+        max-width: 330px
+        padding: 30px 22px
+        font-weight: 400
+        font-size: 14px
+        line-height: 20px
+        letter-spacing: 0.05em
+        color: #5E5E5E
+        position: absolute
+        background: white
+        bottom: -30px
+        left: -110px
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15)
+        border-radius: 10px
+        opacity: 0
+        display: none
+
+        & p
+            margin-top: 20px
+            &:first-child
+                margin-top: 0
+        &.active
+            opacity: 1
+            display: inherit
+
     &__navigate
         display: flex
         align-items: center
@@ -892,10 +1085,9 @@ body
         &-prev
             transform: rotate(180deg)
             margin-left: 15px
-
 .form
     padding: 60px
-    max-width: 675px
+    max-width: 1075px
     background: linear-gradient(94.81deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.12) 100%)
     box-shadow: 0px 0px 46px rgba(0, 0, 0, 0.15), 0px 1px 7px rgba(255, 255, 255, 0.25)
     backdrop-filter: blur(15px)
@@ -925,6 +1117,18 @@ body
         &::placeholder
             color: #9B9B9B
             text-transform: uppercase
+        &:focus
+            border: none
+            position: relative
+            &::before
+                content: ""
+                bottom: 0
+                position: absolute
+                left: 0
+                width: 100%
+                height: 2px
+                background: linear-gradient(94.59deg, #AF87FF 0%, #5B7FFF 99.99%, #D1DBFF 100%)
+
     &__policity
         margin-top: 20px
         font-weight: 400
@@ -933,6 +1137,34 @@ body
         text-align: center
         letter-spacing: 0.05em
         color: #939393
+    &__checkbox
+        position: absolute
+        z-index: -1
+        opacity: 0
+    &__checkbox+label::before
+        content: ''
+        display: inline-block
+        width: 1em
+        height: 1em
+        flex-shrink: 0
+        flex-grow: 0
+        border: 1px solid #adb5bd
+        border-radius: 0.25em
+        margin-right: 0.5em
+        background-repeat: no-repeat
+        background-position: center center
+        background-size: 50% 50%
+        border-radius: 4px
+    &__checkbox+label
+        display: inline-flex
+        align-items: center
+        user-select: none
+    &__checkbox:checked+label::before
+        border: 1px solid linear-gradient(94.59deg, #AF87FF 0%, #5B7FFF 99.99%, #D1DBFF 100%)
+
+        width: 16px
+        height: 16px
+        background-image: url('../images/icons/checkbox.svg')
 
 .course
     max-width: 100%
@@ -1390,6 +1622,8 @@ body
         &__text
             font-size: 18px
             line-height: 22px
+    .team__info-title
+        font-size: 20px !important
 
 @media (max-width: 1250px)
 
@@ -1416,6 +1650,16 @@ body
             display: none
     .company__wrapper
         background: none
+    .team
+
+        &__slide
+            &-title
+                font-size: 25px !important
+                line-height: 110%
+            &:nth-child(2n)
+                font-size: 25px !important
+            &:nth-child(3n)
+                font-size: 25px !important
     .program
 
         padding-top: 290px
@@ -1533,14 +1777,7 @@ body
         margin-top: -75px
         background: url('../images/backgrounds/2-mobile.png') right no-repeat
         padding-top: 100px
-    .team
 
-        &__info
-            &-swiper
-                width: 100%
-                max-width: 550px
-        &__wrapper
-            align-items: center
     .courses
         background-position: right 35% bottom -30%
         &__title
@@ -1617,9 +1854,12 @@ body
         position: absolute
         z-index: 900
         top: 50%
-        
+        width: 100%
         left: 50%
         transform: translateX(-50%) translateY(-50%)
+        display: flex
+        align-items: center
+        justify-content: center
     .form
         backdrop-filter: none
 
@@ -1629,8 +1869,8 @@ body
         &__title
             text-align: center
             font-weight: 700
-            font-size: 16px
-            line-height: 20px
+            font-size: 40px
+
             text-align: center
             letter-spacing: 0.05em
         &__checkbox-wrapper
@@ -1640,9 +1880,15 @@ body
             margin-top: 25px
 @media (max-width: 1000px)
     .team
-        &__wrapper
+        &__slide
             flex-direction: column
-            gap: 30px
+            &-title
+                margin-top: 40px
+        &__slider
+            min-height: 800px
+    .price
+        background: linear-gradient(95.24deg, #A679FF 23.07%, #766EFF 61.53%, #5B7FFF 98.4%)
+        padding-bottom: 40px
 
 @media (max-width: 650px)
     .container
@@ -1673,7 +1919,7 @@ body
                 margin: 0 auto
 
     .team
-        padding: 40px 15px
+        padding: 80px 0px
 
         background: linear-gradient(94.81deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.12) 100%)
         max-width: 90%
@@ -1681,45 +1927,72 @@ body
         box-shadow: 0px 0px 46px rgba(0, 0, 0, 0.15), 0px 1px 7px rgba(255, 255, 255, 0.25)
         backdrop-filter: blur(15px)
         border-radius: 10px
-        &__photo
-            &-swiper
-                max-width: 150px
-        &__info
+        filter: none
+        &__modal
+            position: fixed
+            display: none
+            flex-direction: column
+            top: 50%
+            left: 50%
 
-            &-swiper
-                max-width: 310px
-                margin: 0 auto
-            &-title
-                font-size: 18px
-                line-height: 100%
-                text-align: center
-            &-name, &-position
-                text-align: center
-        &__footer
-            flex-direction: column-reverse
-            justify-content: center
+            width: 95%
+
+            max-width: 100%
+            max-height: 500px
             align-items: center
-        &__about
-            &-text
-                margin-right: 0
-                font-weight: 700
-                font-size: 0.9em
-                letter-spacing: 0.05em
-                color: #FBFFFF
-                text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15)
-                text-decoration: none
-                background: linear-gradient(94.59deg, #DDCCFF 0%, #B2C3FF 99.99%, #D1DBFF 100%)
-                box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.05)
-                padding: 16px 40px
-                transition: all .3s
-                border-radius: 10px
-                &:hover
-                    background-color: linear-gradient(94.59deg, #6C22FF 0%, #5B7FFF 99.99%, #D1DBFF 100%)
+            justify-content: center
+            transform: translateY(-50%) translateX(-50%)
+            &.active
+                display: flex
 
-            &-icon
-                display: none
+        &__user
+            display: flex
+            flex-direction: column-reverse
+            text-align: center
         &__navigate
             margin-top: 25px
+            margin-left: 0
+        &__slide
+            &-image
+                width: 150px
+            &-text
+                margin-left: 0
+            &-footer
+                flex-direction: column-reverse
+                justify-content: center
+                align-items: center
+                margin-top: 50px
+            &-title
+                font-size: 16px !important
+                margin-top: 15px
+            &-name
+                font-size: 25px !important
+            &-position
+                margin-top: 5px
+        &__info
+            position: static
+            &-icon
+                display: none
+
+            &-title
+                cursor: pointer
+                font-size: 14px
+                wdith: 100%
+                text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15)
+                padding: 15px
+                margin: 0px 0px 25px
+                background: linear-gradient(94.59deg, #DDCCFF 0%, #B2C3FF 99.99%, #D1DBFF 100%)
+                box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.05)
+                border-radius: 5px
+                color: white
+        &__slider
+            min-height: 600px
+
+        .cross
+            display: block
+            position: absolute
+            top: 30px
+            right: 30px
     .cours
         &-btn
             padding: 15px 43px
@@ -1739,6 +2012,7 @@ body
         &__input
             margin-top: 20px
             font-size: 14px
+
         &__button
             margin-top: 30px
             display: block
@@ -1748,6 +2022,8 @@ body
         &__policity
             font-size: 12px
             text-align: start
+        &__title
+            font-size: 20px !important
     .footer
         &__wrapper
             display: none
@@ -1793,3 +2069,8 @@ body
                     font-size: 1em
         &__contacts
             margin-top: 20px
+@media (max-width: 1250px)
+    .header__menu-mobile
+        display: flex
+    .burger
+        display: block !important

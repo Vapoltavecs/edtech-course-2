@@ -22,7 +22,6 @@
         <header class="header">
             <div class="container">
                 <div class="header__wrapper">
-
                     <div class="header__main">
                         <a href="/">
                             <img src="./images/logo.svg" alt="logo" class="header__logo">
@@ -30,21 +29,47 @@
                         <nav class="header__nav">
                             <ul class="header__menu">
                                 <li class="header__menu-item">
-                                    <a href="#catalog" class="header__menu-link">Каталог курсов</a>
+                                    <div class="dropdown">
+                                        <a href="#course" class="dropdown-btn header__menu-link">Каталог курсов</a>
+                                        <ul class="dropdown__content">
+                                            <li><a href="">Юрист по работе с инфобизнесоми онлайн школами</a> </li>
+                                            <li><a href="">Юрист в сфере интеллектуальной
+                                                    собственности</a> </li>
+                                            <li><a href="">Legal writing and oral presentation</a> </li>
+                                        </ul>
+                                    </div>
                                 </li>
+
                                 <li class="header__menu-item">
                                     <a href="/" class="header__menu-link">О нас</a>
                                 </li>
                             </ul>
                         </nav>
+
                     </div>
-                    <div class="header__contacts">
-                        <a href="/" class="header__contacts-pretitle">Задай нам вопрос</a>
-                        <a href="/" class="header__contacts-title">email@email.com</a>
+                    <div class="header-right-wrap">
+                        <div class="header__contacts">
+                            <a href="/" class="header__contacts-pretitle">Задай нам вопрос</a>
+                            <a href="/" class="header__contacts-title">email@email.com</a>
+                        </div>
+                        <div class="burger">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </header>
+        <div class="header__menu-mobile">
+            <ul>
+                <li><a href=""> Юрист по работе с инфобизнесом и онлайн школами</a></li>
+                <li><a href="">Юрист в сфере интеллектуальной собственности</a></li>
+                <li><a href="">Legal writing and oral presentation
+                        (на русском языке)</a></li>
+                <li><a href="">О нас</a></li>
+            </ul>
+        </div>
         <div class="container">
             <main>
                 <ul class="main__info">
@@ -516,86 +541,114 @@
     <section class="team">
         <div class="container">
             <div class="team__wrapper">
-                <div>
-                    <div class="team__photo-swiper">
-                        <div class="swiper-wrapper">
-                            <img src="./images/team/1.jpg" alt="team" class="swiper-slide"><img
-                                src="./images/team/2.jpg" alt="team" class="swiper-slide"><img src="./images/team/3.jpg"
-                                alt="team" class="swiper-slide">
+                <div class="team__slider">
+                    <div class="team__slide">
+                        <img src="./images/team/1.jpg" alt="" class="team__slide-image">
+                        <div class="team__slide-text">
+                            <div class="team__user">
+                                <div class="team__slide-title">Кандидат юридических наук, адвокат, преподаватель СПбГУ.
+                                </div>
+                                <div>
+                                    <div class="team__slide-name">Яна Кириллова</div>
+                                    <div class="team__slide-position">Преподаватель</div>
+                                </div>
+                            </div>
+                            <div class="team__slide-footer">
+                                <div class="team__navigation">
+                                    <img src="./images/icons/arrow-next.svg" alt="arrow" class="team__prev">
+                                    <img src="./images/icons/arrow-prev.svg" alt="arrow" class="team__next">
+                                </div>
+                                <div class="team__info">
+                                    <div class="team__info-title">Давай познакомимся</div>
+                                    <img src="./images/icons/warning.jpg" alt="warning" class="team__info-icon">
+                                    <div class="team__modal">
+                                        <p> Обучалась на юридическом факультете СПБГУ по программе «Юриспруденция»,
+                                            бакалавриат и магистратура. Кандидат юридических наук.</p>
+                                        <p>
+                                            Член Адвокатской палаты Санкт-Петербурга, практический опыт в юриспруденции
+                                            более 15 лет.
+                                        </p>
+                                        <p>
+                                            Сейчас преподаю на юридическом факультете СПБГУ. Автор научных статей,
+                                            учебных
+                                            пособий и монографии.
+                                        </p>
+                                        <img src="./images/icons/cross.svg" alt="cross" class="cross">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <div class="team__info-swiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="team__info-title">Кандидат юридических наук, адвокат, преподаватель СПбГУ.
+                    <div class="team__slide">
+                        <img src="./images/team/2.jpg" alt="" class="team__slide-image">
+                        <div class="team__slide-text">
+                            <div class="team__user">
+                                <div class="team__slide-title">Адвокат, руководитель Практики международных проектов и
+                                    права
+                                    интеллектуальной собственности Санкт-Петербургского филиала Коллегии адвокатов
+                                    «Альфа
+                                    Бизнес Консалтинг».
                                 </div>
                                 <div>
-                                    <div class="team__info-name">Яна Кириллова</div>
-                                    <div class="team__info-position">Преподаватель</div>
+                                    <div class="team__slide-name">Артемий Куприянов</div>
+                                    <div class="team__slide-position">Преподаватель</div>
                                 </div>
-
                             </div>
-                            <div class="swiper-slide">
-                                <div class="team__info-title">Адвокат, руководитель Практики международных проектов и
-                                    права интеллектуальной собственности Санкт-Петербургского филиала Коллегии адвокатов
-                                    «Альфа Бизнес Консалтинг».
+                            <div class="team__slide-footer">
+                                <div class="team__navigation">
+                                    <img src="./images/icons/arrow-next.svg" alt="arrow" class="team__prev">
+                                    <img src="./images/icons/arrow-prev.svg" alt="arrow" class="team__next">
                                 </div>
-                                <div>
-                                    <div class="team__info-name">Артемий Куприянов</div>
-                                    <div class="team__info-position">Преподаватель</div>
+                                <div class="team__info">
+                                    <div class="team__info-title">Давай познакомимся</div>
+                                    <img src="./images/icons/warning.jpg" alt="warning" class="team__info-icon">
+                                    <div class="team__modal">
+                                        Выпускник Юридического факультета СПБГУ(Бакалавриат). С отличием (Honors)
+                                        завершил программу магистратуры (LLM) Иллинойского университета в
+                                        Урбане-Шампейне, входящего в ТОП-30 лучших юридических школ США.
+                                        Реализация международных проектов в сфере интеллектуальной собственности,
+                                        корпоративного и налогового права, защиты персональных данных, а также
+                                        представлении интересов доверителей в судах и международных коммерческих
+                                        арбитражах.
+                                        <img src="./images/icons/cross.svg" alt="cross" class="cross">
+                                    </div>
                                 </div>
-
                             </div>
-                            <div class="swiper-slide">
-                                <div class="team__info-title">Большой опыт работы с инфобизнесом, в качестве юриста в
+                        </div>
+                    </div>
+                    <div class="team__slide">
+                        <img src="./images/team/3.jpg" alt="" class="team__slide-image">
+                        <div class="team__slide-text">
+                            <div class="team__user">
+                                <div class="team__slide-title">Большой опыт работы с инфобизнесом, в качестве юриста в
                                     гражданско-правовой сфере в частных организациях, и в Администрации Президента
                                     Приднестровской Молдавской Республики.
                                 </div>
                                 <div>
-                                    <div class="team__info-name">Екатирина Добрыдень</div>
-                                    <div class="team__info-position">Преподаватель</div>
+                                    <div class="team__slide-name">Екатирина Добрыдень</div>
+                                    <div class="team__slide-position">Преподаватель</div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="team__footer">
-                        <div class="team__navigate">
-                            <div class="team__navigate-next team__navigate-icon"><svg width="64px" height="64px"
-                                    class="hidden">
-                                    <svg width="64" height="64" class="hidden">
-                                        <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 65"
-                                            id="arrow-next-2">
-                                            <circle cx="32" cy="32.5522" r="32" fill="#FBFFFF"></circle>
-                                            <path
-                                                d="M24.7733 42.8989L35.12 32.5522L24.7733 22.2055C23.7333 21.1655 23.7333 19.4855 24.7733 18.4455C25.8133 17.4055 27.4933 17.4055 28.5333 18.4455L40.7733 30.6855C41.8133 31.7255 41.8133 33.4055 40.7733 34.4455L28.5333 46.6855C27.4933 47.7255 25.8133 47.7255 24.7733 46.6855C23.76 45.6455 23.7333 43.9389 24.7733 42.8989Z"
-                                                fill="#0A1C26"></path>
-                                        </symbol>
-                                    </svg>
-                                    <svg class="icon">
-                                        <use xlink:href="#arrow-next-2"></use>
-                                    </svg>
+                            <div class="team__slide-footer">
+                                <div class="team__navigation">
+                                    <img src="./images/icons/arrow-next.svg" alt="arrow" class="team__prev">
+                                    <img src="./images/icons/arrow-prev.svg" alt="arrow" class="team__next">
+                                </div>
+                                <div class="team__info">
+                                    <div class="team__info-title">Давай познакомимся</div>
+                                    <img src="./images/icons/warning.jpg" alt="warning" class="team__info-icon">
+                                    <div class="team__modal">
+                                        Екатерина обучалась в Приднестровском государственном университете им.Т.Г.
+                                        Шевченко, на юридическом факультете и получила в 2014 году диплом специалиста по
+                                        кафедре гражданского и трудового права.
+                                        Далее Екатерина продолжила обучение на юридическом факультете
+                                        Санкт-Петербургского государственного университета (СПбГУ), имеет степень
+                                        магистра права. В настоящее время обучается в аспирантуре юридического
+                                        факультета СПбГУ
+                                        <img src="./images/icons/cross.svg" alt="cross" class="cross">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="team__navigate-prev team__navigate-icon">
-                                <svg width="64" height="64" class="hidden">
-                                    <svg width="64" height="64" class="hidden">
-                                        <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 65"
-                                            id="arrow-next-3">
-                                            <circle cx="32" cy="32.5522" r="32" fill="#FBFFFF"></circle>
-                                            <path
-                                                d="M24.7733 42.8989L35.12 32.5522L24.7733 22.2055C23.7333 21.1655 23.7333 19.4855 24.7733 18.4455C25.8133 17.4055 27.4933 17.4055 28.5333 18.4455L40.7733 30.6855C41.8133 31.7255 41.8133 33.4055 40.7733 34.4455L28.5333 46.6855C27.4933 47.7255 25.8133 47.7255 24.7733 46.6855C23.76 45.6455 23.7333 43.9389 24.7733 42.8989Z"
-                                                fill="#0A1C26"></path>
-                                        </symbol>
-                                    </svg>
-                                    <svg class="icon">
-                                        <use xlink:href="#arrow-next-3"></use>
-                                    </svg>
-                            </div>
-                        </div>
-                        <div class="team__about">
-                            <div class="team__about-text">Давай познакомимся</div>
-                            <img src="./images/icons/warning.jpg" alt="warning" class="team__about-icon">
                         </div>
                     </div>
                 </div>
@@ -853,12 +906,12 @@
                 <input type="text" class="form__input" placeholder="телефон">
                 <div class="form__variants">
 
-                    <div class="form__checkbox-wrapper"><input type="checkbox" class="form__checkbox">
-                        <div class="form__checkbox-title">Рассрочка от школы (на 3 месяца)</div>
+                    <div class="form__checkbox-wrapper"><input id="checkbox1" type="checkbox" class="form__checkbox">
+                        <label class="form__checkbox-title" for="checkbox1">Рассрочка от школы (на 3 месяца)</label>
                     </div>
-                    <div class="form__checkbox-wrapper"><input type="checkbox" class="form__checkbox">
-                        <div class="form__checkbox-title">Рассрочка от банка Тинькофф
-                            (от 2 до 12 месяцев)</div>
+                    <div class="form__checkbox-wrapper"><input id="checkbox2" type="checkbox" class="form__checkbox">
+                        <label for="checkbox2" class="form__checkbox-title">Рассрочка от банка Тинькофф
+                            (от 2 до 12 месяцев)</label>
                     </div>
                 </div>
                 <button class="form__button">Отправить</button>
