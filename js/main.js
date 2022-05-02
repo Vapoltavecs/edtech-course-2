@@ -149,7 +149,37 @@ window.addEventListener("DOMContentLoaded", () => {
   const priceToMonth = document.querySelector(".course__price-title");
   const duration = document.querySelector(".course__opportunities-text");
   const advantagers = document.querySelector(".advantagers__list");
-  const changeRateBtn = document.querySelector(".course__subtitle-icon");
+  const changeRateBtn = document.querySelector(".course__change-button");
+  const rateInfo = document.querySelector(".rate-info");
+  const priceInfo = document.querySelector(".course__info-name");
+  const infoModal = document.querySelector(".course__info-modal");
+  const infoModalBtn = document.querySelector(".course__btn-icon");
+  const closeInfoModal = document.querySelector(".course__cross");
+
+  const closeInfo = () => {
+    infoModal
+      .animate([{ opacity: 1 }, { opacity: 0 }], {
+        duration: 400,
+        fill: "forwards",
+      })
+      .addEventListener("finish", () => {
+        infoModal.classList.remove("active");
+      });
+  };
+  infoModalBtn.addEventListener("click", (e) => {
+    if (infoModal.classList.contains("active")) {
+      closeInfo()
+    } else {
+      infoModal.classList.add("active");
+      infoModal.animate([{ opacity: 0 }, { opacity: 1 }], {
+        duration: 400,
+        fill: "forwards",
+      });
+    }
+  });
+
+  closeInfoModal.addEventListener("click",closeInfo);
+
   Object.keys(rates).forEach(
     (el) =>
       (ratesBlock.innerHTML += `<li class="course-modal-item" data-course-name="${el}">Тариф ${rates[el].name}</li>`)
@@ -181,7 +211,9 @@ window.addEventListener("DOMContentLoaded", () => {
   const renderRate = (rate) => {
     title.innerText = "Тариф " + rate.name;
     name.innerText = "Оплатить " + "Тариф " + rate.name;
+    rateInfo.innerText = "Тариф " + rate.name;
     price.innerText = rate.price;
+    priceInfo.innerText = "Цена курса составляет ₽" + rate.price;
     priceToMonth.innerText = Math.round(rate.price / rate.paymentDuration);
     const { weeks } = convertDate(rate.duration);
     duration.innerText = weeks + " " + declinationWeeks(weeks);
@@ -199,6 +231,7 @@ window.addEventListener("DOMContentLoaded", () => {
     priceToMonth.innerText = "";
     duration.innerText = "";
     advantagers.innerHTML = "";
+    rateInfo.innerText = "";
   };
   resetCourse();
   renderRate(rates[currentCourse]);
@@ -266,7 +299,7 @@ window.addEventListener("DOMContentLoaded", () => {
       !target.classList.contains("course-change-modal") &&
       !path
         .filter((el) => el.classList)
-        .some((el) => el.classList.contains("course__subtitle-icon")) &&
+        .some((el) => el.classList.contains("course__change-button")) &&
       !target.classList.contains("sale__card-btn") &&
       !target.classList.contains("sale__card-btn-2")
     ) {
